@@ -12,22 +12,19 @@ int main() {
         cin >> M[i];
     }
 
-    D[0] = M[0];
+    D[0] = 1;
 
     for(int i = 1; i < N; i++){
         D[i] += M[i-1]<M[i]?1:0;
     }
 
-    int maxnum = 0;
+    int len = 0;
 
     for(int i=0; i<N; i++){
-        maxnum += D[i] == 1 ? 1 : 0;
+        len += D[i] == 1 ? 1 : 0;
     }
 
-    cout << maxnum << endl;
-/*
-    for(int i =0; i<N; i++)
-        cout << D[i] << " ";
-*/
+    cout << len << endl;
+
     return 0;
 }
