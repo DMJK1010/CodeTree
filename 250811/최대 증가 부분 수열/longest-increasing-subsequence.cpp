@@ -1,35 +1,40 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <climits>
+#include <algorithm>
+
+#define MAX_NUM 1000
 
 using namespace std;
 
-int N;
-int M[1000];
-int D[1000] = { INT_MIN, };
+int dp[MAX_NUM + 1];
+int n;
+int a[MAX_NUM + 1];
+
+void Initialize() {
+    for(int i = 0; i <= n; i++)
+        dp[i] = INT_MIN;
+    
+    dp[0] = 0;
+    a[0] = 0;
+}
 
 int main() {
-    cin >> N;
-    for (int i = 0; i < N; i++) {
-        cin >> M[i];
+    cin >> n;
+    for(int i = 1; i <= n; i++)
+        cin >> a[i];
+
+    Initialize();
+
+    for(int i = 1; i <= n; i++){
+
+        for(int j = 0; j < i; j++)
+            if(a[j] < a[i])
+                dp[i] = max(dp[i], dp[j] + 1);
     }
 
-    // Please write your code here.
-    D[0] = 1;
+    int answer = 0;
+    for(int i = 0; i <= n ; i++)
+        answer = max(answer, dp[i]);
 
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < i; j++) {
-            if( M[j] < M[i] && D[j] + 1 > D[i]) {
-                D[i] = D[j] + 1;
-			}
-        }
-    }
-
-	int ans = 0;
-
-    for (int i = 0; i < N; i++) {
-        ans = max(ans, D[i]);
-	}
-	cout << ans << endl;
-
-
-    return 0;
+    cout << answer;
 }
