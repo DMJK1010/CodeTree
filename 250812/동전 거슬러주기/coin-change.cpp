@@ -12,26 +12,24 @@ int main() {
         cin >> coin[i];
     }
 
-    vector<int> D(M + 1, INT_MAX); 
+    vector<int> D(M+1, INT_MAX);
     D[0] = 0;
     
     for (int i = 1; i <= M; i++) {
         for (int j = 0; j < N; j++) {
             if (i >= coin[j]) {
-                if (D[i - coin[j]] != INT_MAX) {
-                    D[i] = min(D[i], D[i - coin[j]] + 1);
-                }
+                if (D[i - coin[j]] == INT_MAX) continue;
+                D[i] = min(D[i], D[i - coin[j]] + 1);
             }
         }
     }
 
-    int ans = D[M];
+	int ans = D[M];
 
-    if (ans == INT_MAX) {
-        cout << -1 << endl;
-    } else {
-        cout << ans << endl;
-    }
+    if (ans == INT_MAX)
+        ans = -1;
+
+	cout << ans << endl;
 
     return 0;
 }
