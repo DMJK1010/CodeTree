@@ -20,12 +20,11 @@ int main() {
         D[i] = max(arr[i], D[i - 1] + arr[i]);
     }
 
-
     int max_d = D[0];
 
     for (int i = 1; i < N; i++)
-        max_d = max(D[i - 1], D[i]);
+        max_d = max(max_d, D[i]);
 
-	cout << max_d << endl;
+	cout << max_d  << endl;
     return 0;
 }
